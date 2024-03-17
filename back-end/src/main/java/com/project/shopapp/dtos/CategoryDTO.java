@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024. vnlemanhthanh.com
- */
-
 package com.project.shopapp.dtos;
 
 import jakarta.validation.constraints.NotEmpty;
