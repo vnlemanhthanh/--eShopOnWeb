@@ -5,7 +5,7 @@ ALTER DATABASE shopapp
   DEFAULT COLLATE utf8_general_ci;
 
 USE shopapp;
---Khách hàng khi muốn mua hàng => phải đăng ký tài khoản => bảng users
+--  Khách hàng khi muốn mua hàng => phải đăng ký tài khoản => bảng users
 CREATE TABLE users(
     id INT PRIMARY KEY AUTO_INCREMENT,
     fullname VARCHAR(100) DEFAULT '',
@@ -38,7 +38,7 @@ CREATE TABLE tokens(
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
---hỗ trợ đăng nhập từ Facebook và Google
+-- hỗ trợ đăng nhập từ Facebook và Google
 CREATE TABLE social_accounts(
     id INT PRIMARY KEY AUTO_INCREMENT,
     provider VARCHAR(20) NOT NULL COMMENT 'Tên nhà social network',
@@ -49,13 +49,13 @@ CREATE TABLE social_accounts(
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
---Bảng danh mục sản phẩm(Category)
+-- Bảng danh mục sản phẩm(Category)
 CREATE TABLE categories(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name varchar(100) NOT NULL DEFAULT '' COMMENT 'Tên danh mục, vd: đồ điện tử'
 );
 
---Bảng chứa sản phẩm(Product): "laptop macbook air 15 inch 2023", iphone 15 pro,...
+-- Bảng chứa sản phẩm(Product): "laptop macbook air 15 inch 2023", iphone 15 pro,...
 CREATE TABLE products (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(350) COMMENT 'Tên sản phẩm',
@@ -78,7 +78,7 @@ CREATE TABLE product_images(
     image_url VARCHAR(300)
 );
 
---Đặt hàng - orders
+-- Đặt hàng - orders
 CREATE TABLE orders(
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id int,
@@ -98,9 +98,9 @@ ALTER TABLE orders ADD COLUMN `shipping_address` VARCHAR(200);
 ALTER TABLE orders ADD COLUMN `shipping_date` DATE;
 ALTER TABLE orders ADD COLUMN `tracking_number` VARCHAR(100);
 ALTER TABLE orders ADD COLUMN `payment_method` VARCHAR(100);
---xóa 1 đơn hàng => xóa mềm => thêm trường active
+-- xóa 1 đơn hàng => xóa mềm => thêm trường active
 ALTER TABLE orders ADD COLUMN active TINYINT(1);
---Trạng thái đơn hàng chỉ đc phép nhận "một số giá trị cụ thể"
+-- Trạng thái đơn hàng chỉ đc phép nhận "một số giá trị cụ thể"
 ALTER TABLE orders 
 MODIFY COLUMN status ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled') 
 COMMENT 'Trạng thái đơn hàng';
